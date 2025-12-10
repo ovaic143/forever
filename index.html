@@ -638,6 +638,27 @@
       margin-bottom: 0.7rem;
       font-size: 0.79rem;
     }
+.audio-btn {
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--muted);
+  font-size: 0.72rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+  transition: all 0.16s ease;
+}
+
+.audio-btn:hover {
+  border-color: var(--accent2);
+  color: var(--accent2);
+  transform: translateY(-1px);
+}
+
 
     .filter-btn {
       padding: 0.25rem 0.8rem;
@@ -1367,42 +1388,55 @@
           </div>
         </article>
 
-        <!-- BASIT -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">TOOLS</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#5</span>
-            <span>Tool Kit Manager</span>
-          </div>
-          <h3 class="student-name">Basit</h3>
-          <div class="student-role">Role: Screwdriver &amp; Tools Master</div>
-          <p class="student-qualities">
-            Qualities: Always ready with the right tool, organised, remembers where everything is kept.
-          </p>
-          <p class="student-fun">
-            Funny: Treats missing screwdriver like a missing person case – full investigation mode on.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">🧰 “Tools ka boss”</span>
-            <a class="wa-link"
-               href="https://wa.me/916005336599?text=Basit%2C%20tool%20master!%20Our%20CHNM%20website%20is%20ready%20%E2%9A%99%EF%B8%8F"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Basit
-            </a>
-          </div>
-        </article>
+       <!-- BASIT -->
+<article class="student-card" data-gender="boys">
+  <div class="mini-robot">
+    <div class="mini-body">
+      <div class="mini-head">
+        <div class="mini-eye left"></div>
+        <div class="mini-eye right"></div>
+      </div>
+      <div class="mini-status">TOOLS</div>
+      <div class="mini-legs">
+        <div class="mini-leg"></div>
+        <div class="mini-leg"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- hidden audio element for Basit -->
+  <audio id="audio-basit" src="basit.mp3"></audio>
+
+  <div class="student-rank">
+    <span>#5</span>
+    <span>Tool Kit Manager</span>
+  </div>
+  <h3 class="student-name">Basit</h3>
+  <div class="student-role">Role: Screwdriver &amp; Tools Master</div>
+  <p class="student-qualities">
+    Qualities: Always ready with the right tool, organised, remembers where everything is kept.
+  </p>
+  <p class="student-fun">
+    Funny: Treats missing screwdriver like a missing person case – full investigation mode on.
+  </p>
+  <div class="student-meta-row">
+    <span class="student-tag">🧰 “Tools ka boss”</span>
+    <div style="display:flex; gap:0.3rem; align-items:center;">
+      <button
+        type="button"
+        class="audio-btn"
+        onclick="document.getElementById('audio-basit').play()"
+      >
+        🔊 Play Audio
+      </button>
+      <a class="wa-link"
+         href="https://wa.me/916005336599?text=Basit%2C%20tool%20master!%20Our%20CHNM%20website%20is%20ready%20%E2%9A%99%EF%B8%8F"
+         target="_blank">
+        <span class="icon">📲</span> WhatsApp Basit
+      </a>
+    </div>
+  </div>
+</article>
 
         <!-- RAYEES -->
         <article class="student-card" data-gender="boys">
@@ -1551,45 +1585,58 @@
             </a>
           </div>
         </article>
+<!-- IKHLAS -->
+<article class="student-card" data-gender="boys">
+  <div class="mini-robot">
+    <div class="mini-body">
+      <div class="mini-head">
+        <div class="mini-eye left"></div>
+        <div class="mini-eye right"></div>
+      </div>
+      <div class="mini-status">KEY</div>
+      <div class="mini-legs">
+        <div class="mini-leg"></div>
+        <div class="mini-leg"></div>
+      </div>
+    </div>
+  </div>
 
-        <!-- IKHLAS -->
-        <article class="student-card" data-gender="boys">
-          <div class="mini-robot">
-            <div class="mini-body">
-              <div class="mini-head">
-                <div class="mini-eye left"></div>
-                <div class="mini-eye right"></div>
-              </div>
-              <div class="mini-status">KEY</div>
-              <div class="mini-legs">
-                <div class="mini-leg"></div>
-                <div class="mini-leg"></div>
-              </div>
-            </div>
-          </div>
-          <div class="student-rank">
-            <span>#10</span>
-            <span>Shortcut Finder</span>
-          </div>
-          <h3 class="student-name">Ikhlas</h3>
-          <div class="student-role">Role: Keyboard &amp; Shortcuts Guy</div>
-          <p class="student-qualities">
-            Qualities: Loves keyboard shortcuts, finds easier ways to do hard tasks, remembers commands quickly.
-          </p>
-          <p class="student-fun">
-            Funny: Uses so many shortcuts that sometimes even Windows gets confused.
-          </p>
-          <div class="student-meta-row">
-            <span class="student-tag">⌨️ Shortcut master</span>
-            <a class="wa-link"
-               href="https://wa.me/916006278377?text=Ikhlas%2C%20shortcut%20king%21%20Website%20bhi%20ready%20shortcut%20style%20%F0%9F%94%97"
-               target="_blank">
-              <span class="icon">📲</span> WhatsApp Ikhlas
-            </a>
-          </div>
-        </article>
+  <!-- hidden audio element for Ikhlas -->
+  <audio id="audio-ikhlas" src="ikhlas.mp3"></audio>
 
-        <!-- SALMAN -->
+  <div class="student-rank">
+    <span>#10</span>
+    <span>Shortcut Finder</span>
+  </div>
+  <h3 class="student-name">Ikhlas</h3>
+  <div class="student-role">Role: Keyboard &amp; Shortcuts Guy</div>
+  <p class="student-qualities">
+    Qualities: Loves keyboard shortcuts, finds easier ways to do hard tasks, remembers commands quickly.
+  </p>
+  <p class="student-fun">
+    Funny: Uses so many shortcuts that sometimes even Windows gets confused.
+  </p>
+  <div class="student-meta-row">
+    <span class="student-tag">⌨️ Shortcut master</span>
+    <div style="display:flex; gap:0.3rem; align-items:center;">
+      <button
+        type="button"
+        class="audio-btn"
+        onclick="document.getElementById('audio-ikhlas').play()"
+      >
+        🔊 Play Audio
+      </button>
+      <a class="wa-link"
+         href="https://wa.me/916006278377?text=Ikhlas%2C%20shortcut%20king%21%20Website%20bhi%20ready%20shortcut%20style%20%F0%9F%94%97"
+         target="_blank">
+        <span class="icon">📲</span> WhatsApp Ikhlas
+      </a>
+    </div>
+  </div>
+</article>
+
+
+                <!-- SALMAN -->
         <article class="student-card" data-gender="boys">
           <div class="mini-robot">
             <div class="mini-body">
