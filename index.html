@@ -4,27 +4,6 @@
   <meta charset="UTF-8" />
   <title>ITI Anantnag - CHNM Trade</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-.speak-btn {
-  padding: 0.18rem 0.55rem;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  background: rgba(15, 23, 42, 0.9);
-  color: var(--muted);
-  font-size: 0.72rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  transition: all 0.16s ease;
-  white-space: nowrap;
-}
-
-.speak-btn:hover {
-  border-color: var(--accent-2);
-  color: var(--accent-2);
-  transform: translateY(-1px);
-}
-
   <style>
     :root {
       --bg: #050816;
@@ -55,12 +34,12 @@
       overflow-x: hidden;
     }
 
-    /* Animated background glow */
+    /* Animated background glow + circuit grid theme */
     .bg-orbit {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: -1;
+      z-index: -2;
       background:
         radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.25), transparent 60%),
         radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.25), transparent 60%),
@@ -68,6 +47,24 @@
       filter: blur(4px);
       animation: orbit 16s linear infinite alternate;
       opacity: 0.9;
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      background-image:
+        linear-gradient(rgba(15, 23, 42, 0.6) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 23, 42, 0.6) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.4;
+      animation: gridScroll 30s linear infinite;
+    }
+
+    @keyframes gridScroll {
+      0% { transform: translate3d(0,0,0); }
+      100% { transform: translate3d(-40px,-40px,0); }
     }
 
     @keyframes orbit {
@@ -89,9 +86,9 @@
       backdrop-filter: blur(20px);
       background: linear-gradient(
         to right,
-        rgba(15, 23, 42, 0.92),
+        rgba(15, 23, 42, 0.96),
         rgba(15, 23, 42, 0.7),
-        rgba(15, 23, 42, 0.92)
+        rgba(15, 23, 42, 0.96)
       );
       border-bottom: 1px solid rgba(148, 163, 184, 0.2);
     }
@@ -127,6 +124,27 @@
       font-size: 0.7rem;
       background: radial-gradient(circle at 30% 0, #22c55e, #0f172a);
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-badge::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(34, 197, 94, 0.7),
+        transparent 40%,
+        transparent
+      );
+      opacity: 0.2;
+      animation: spinHalo 4s linear infinite;
+    }
+
+    @keyframes spinHalo {
+      to { transform: rotate(360deg); }
     }
 
     .logo span {
@@ -498,6 +516,19 @@
       grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
       gap: 1rem;
       box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trade-theme::after {
+      content: "CHNM CIRCUIT THEME";
+      position: absolute;
+      bottom: -8px;
+      right: 12px;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      opacity: 0.35;
+      text-transform: uppercase;
     }
 
     .trade-theme ul {
@@ -561,7 +592,7 @@
       }
     }
 
-    /* Cards */
+    /* Generic card */
     .card {
       border-radius: var(--radius-xl);
       padding: 1rem;
@@ -642,6 +673,51 @@
       background: rgba(15, 23, 42, 0.9);
     }
 
+    /* Lab culture / rules */
+    .lab-culture-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.9fr);
+      gap: 1rem;
+    }
+
+    .lab-list {
+      list-style: none;
+      margin-top: 0.4rem;
+      font-size: 0.83rem;
+    }
+
+    .lab-list li {
+      margin-bottom: 0.3rem;
+      display: flex;
+      gap: 0.4rem;
+      align-items: flex-start;
+    }
+
+    .lab-list span.bullet {
+      font-size: 0.85rem;
+    }
+
+    .lab-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .lab-stat {
+      border-radius: 14px;
+      padding: 0.5rem 0.6rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+    }
+
+    .lab-stat strong {
+      display: block;
+      margin-bottom: 0.1rem;
+      font-size: 0.8rem;
+    }
+
     /* Students */
     .student-filters {
       display: flex;
@@ -683,12 +759,16 @@
       border: 1px solid rgba(75, 85, 99, 0.6);
       overflow: hidden;
       cursor: default;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease,
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease,
         background 0.16s ease;
+      transform-origin: center;
     }
 
     .student-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-4px) rotateX(2deg) rotateY(-1deg);
       box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
       border-color: rgba(34, 197, 94, 0.6);
       background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.22), #020617);
@@ -782,6 +862,190 @@
       color: #facc15;
     }
 
+    /* MINI ROBOT ASSISTANT */
+    #robo-assistant {
+      position: fixed;
+      width: 76px;
+      height: 96px;
+      pointer-events: none;
+      z-index: 60;
+      transform: translate(50vw, 60vh);
+      transition: transform 0.15s ease-out;
+    }
+
+    .robo-body {
+      width: 70px;
+      margin: 0 auto;
+      border-radius: 18px;
+      background: radial-gradient(circle at top, #22c55e, #0f172a);
+      border: 2px solid rgba(148, 163, 184, 0.8);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.8);
+      position: relative;
+      padding: 6px 4px 8px;
+      animation: roboIdle 2.4s ease-in-out infinite;
+    }
+
+    @keyframes roboIdle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    #robo-assistant.active .robo-body {
+      animation: roboExcited 0.6s ease-in-out infinite;
+    }
+
+    @keyframes roboExcited {
+      0%, 100% { transform: translateY(-2px) rotate(-2deg); }
+      50% { transform: translateY(2px) rotate(2deg); }
+    }
+
+    .robo-head {
+      width: 34px;
+      height: 24px;
+      border-radius: 12px;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      border: 2px solid rgba(226, 232, 240, 0.8);
+      margin: 0 auto 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .robo-eye {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      position: absolute;
+      top: 8px;
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+      animation: eyeBlink 5s infinite;
+    }
+
+    .robo-eye.left { left: 8px; }
+    .robo-eye.right { right: 8px; }
+
+    @keyframes eyeBlink {
+      0%, 4%, 100% { transform: scaleY(1); }
+      2%, 3% { transform: scaleY(0.1); }
+    }
+
+    .robo-antenna {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 10px;
+    }
+
+    .robo-antenna-line {
+      width: 2px;
+      height: 10px;
+      background: rgba(226, 232, 240, 0.8);
+      margin: 0 auto;
+    }
+
+    .robo-antenna-tip {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #38bdf8;
+      margin: -3px auto 0;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.9);
+      animation: antennaPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes antennaPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    .robo-body-inner {
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 4px 4px 6px;
+      position: relative;
+    }
+
+    .robo-wave {
+      position: absolute;
+      top: 4px;
+      right: -6px;
+      width: 14px;
+      height: 18px;
+      border-radius: 999px;
+      border: 2px solid rgba(148, 163, 184, 0.8);
+      background: radial-gradient(circle at top, #22c55e, #0f172a);
+      transform-origin: top left;
+      animation: roboHand 2.2s ease-in-out infinite;
+    }
+
+    @keyframes roboHand {
+      0%, 70%, 100% { transform: rotate(10deg); }
+      35% { transform: rotate(40deg); }
+    }
+
+    #robo-assistant.active .robo-wave {
+      animation: roboHandFast 0.6s ease-in-out infinite;
+    }
+
+    @keyframes roboHandFast {
+      0%, 100% { transform: rotate(5deg); }
+      50% { transform: rotate(45deg); }
+    }
+
+    .robo-status {
+      font-size: 0.55rem;
+      color: #e5e7eb;
+      text-align: center;
+    }
+
+    .robo-status span {
+      display: block;
+      font-size: 0.5rem;
+      color: #a5b4fc;
+      margin-top: 1px;
+    }
+
+    .robo-bars {
+      display: flex;
+      gap: 2px;
+      margin-top: 3px;
+      justify-content: center;
+    }
+
+    .robo-bar {
+      width: 4px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(to top, #22c55e, #38bdf8);
+      opacity: 0.6;
+      animation: bars 1.2s ease-in-out infinite;
+    }
+
+    .robo-bar:nth-child(2) { animation-delay: 0.15s; }
+    .robo-bar:nth-child(3) { animation-delay: 0.3s; }
+
+    #robo-assistant.active .robo-bar {
+      opacity: 1;
+      animation-duration: 0.6s;
+    }
+
+    @keyframes bars {
+      0%, 100% { transform: scaleY(0.4); }
+      50% { transform: scaleY(1); }
+    }
+
+    .robo-label {
+      text-align: center;
+      margin-top: 3px;
+      font-size: 0.58rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -804,6 +1068,9 @@
       .trade-theme {
         grid-template-columns: 1fr;
       }
+      .lab-culture-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 640px) {
@@ -821,6 +1088,34 @@
 </head>
 <body>
   <div class="bg-orbit"></div>
+  <div class="bg-grid"></div>
+
+  <!-- MINI ROBOT ASSISTANT -->
+  <div id="robo-assistant" aria-hidden="true">
+    <div class="robo-body">
+      <div class="robo-antenna">
+        <div class="robo-antenna-line"></div>
+        <div class="robo-antenna-tip"></div>
+      </div>
+      <div class="robo-head">
+        <div class="robo-eye left"></div>
+        <div class="robo-eye right"></div>
+      </div>
+      <div class="robo-body-inner">
+        <div class="robo-wave"></div>
+        <div class="robo-status">
+          CHNM Bot
+          <span>Hover card 2 sec</span>
+        </div>
+        <div class="robo-bars">
+          <div class="robo-bar"></div>
+          <div class="robo-bar"></div>
+          <div class="robo-bar"></div>
+        </div>
+      </div>
+    </div>
+    <div class="robo-label">Circuit Guardian</div>
+  </div>
 
   <!-- NAVBAR -->
   <header>
@@ -832,6 +1127,7 @@
       <nav class="nav-links">
         <a href="#top">Home</a>
         <a href="#trade">Trade Theme</a>
+        <a href="#culture">Lab Culture</a>
         <a href="#sir">Instructor</a>
         <a href="#students">Students</a>
       </nav>
@@ -848,17 +1144,19 @@
         </div>
         <h1 class="hero-title">
           Computer Hardware &amp; Network Maintenance<br />
-          <span>Home of Future Tech Ninjas</span>
+          <span>“Circuit Guardian Theme”</span>
         </h1>
         <p class="hero-subtitle">
           Official mini-website of <strong>ITI Anantnag – Trade CHNM</strong>.
           One instructor, one squad, dozens of motherboards, and unlimited Wi-Fi troubleshooting.
+          Now upgraded with your own <strong>CHNM Robot Guide</strong>. 🤖
         </p>
 
         <div class="hero-pill-row">
           <div class="pill">🖥️ PC Building</div>
           <div class="pill">🌐 Network Cabling</div>
           <div class="pill">🛠️ Fault Finding</div>
+          <div class="pill">🤖 Smart CHNM Bot</div>
           <div class="pill">😄 Fun &amp; Friendly Batch</div>
         </div>
 
@@ -902,7 +1200,12 @@
           </div>
           <div class="hero-line">
             <span class="prefix">CHNM&gt;</span>
-            <span class="text-soft">Status:</span>
+            <span class="text-soft">Bot status:</span>
+            <span class="text-strong">Hover any student card for 2 seconds.</span>
+          </div>
+          <div class="hero-line">
+            <span class="prefix">CHNM&gt;</span>
+            <span class="text-soft">Lab mood:</span>
             <span class="text-strong">0 errors, 100% laughter, full attendance (sometimes).</span>
           </div>
           <div class="hero-line">
@@ -913,7 +1216,7 @@
         </div>
         <div class="hero-badge">
           <span>⚡ Live Trade: Computer Hardware & Network Maintenance</span>
-          <span class="chip">Batch • ITI Anantnag</span>
+          <span class="chip">Theme • Circuit Guardians</span>
         </div>
       </aside>
     </section>
@@ -921,7 +1224,7 @@
     <!-- TRADE THEME -->
     <section id="trade">
       <div class="section-header">
-        <h2 class="section-title">Trade Theme – <span>CHNM Vibes</span></h2>
+        <h2 class="section-title">Trade Theme – <span>CHNM Circuit Guardians</span></h2>
         <p class="section-sub">The heart of every working PC and every shouting “Internet nai chal raha!” call.</p>
       </div>
 
@@ -978,6 +1281,61 @@
             Our theme is simple: <strong>Learn seriously, laugh loudly, and never leave a system
             half-fixed.</strong> Every BSOD and “no display” is just another level to clear.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB CULTURE / RULES -->
+    <section id="culture">
+      <div class="section-header">
+        <h2 class="section-title">Lab Culture – <span>CHNM Way</span></h2>
+        <p class="section-sub">Where discipline, learning and jokes happily live together.</p>
+      </div>
+
+      <div class="lab-culture-grid">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Lab Rules (Unofficial but Important)</h3>
+            <div class="badge">
+              <div class="badge-dot"></div>
+              <span>Respect systems. Respect people.</span>
+            </div>
+          </div>
+          <ul class="lab-list">
+            <li><span class="bullet">🧼</span><span>Handle every PC like it’s your own – no random wire pulling.</span></li>
+            <li><span class="bullet">⌛</span><span>Be on time for practicals. Computers hate late booting and late students.</span></li>
+            <li><span class="bullet">🤝</span><span>Help your batchmates. Today you fix their error; tomorrow they fix yours.</span></li>
+            <li><span class="bullet">🔇</span><span>Noise OFF during explanation. Fun ON during practice (but in limits).</span></li>
+            <li><span class="bullet">📋</span><span>Document what you do – IPs, changes, ideas. Future you will thank you.</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Fun Lab Stats</h3>
+            <div class="badge">
+              <div class="badge-dot"></div>
+              <span>CHNM Batch Highlights</span>
+            </div>
+          </div>
+          <div class="lab-stats">
+            <div class="lab-stat">
+              <strong>50+ PCs</strong>
+              Windows installed, reinstalled and “repair installed” more times than we admit.
+            </div>
+            <div class="lab-stat">
+              <strong>∞ Cables</strong>
+              LAN, power, VGA, HDMI – if it’s tangled, CHNM will untangle it.
+            </div>
+            <div class="lab-stat">
+              <strong>Daily Question</strong>
+              “Sir, aaj practical hoga ya theory?” – asked at least once every day.
+            </div>
+            <div class="lab-stat">
+              <strong>Official Tagline</strong>
+              “If it’s not working, give it to CHNM batch.”
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1382,74 +1740,129 @@
   </main>
 
   <footer>
-    Made with ❤️ by the <span>CHNM Trade</span> at ITI Anantnag – where PCs get repaired and
-    friendships get upgraded.
+    Made with ❤️ by the <span>CHNM Trade</span> at ITI Anantnag – where PCs get repaired, networks get fixed and friendships get upgraded.
   </footer>
 
   <script>
-  // Simple filter for students: all / boys / girls
-  const filterButtons = document.querySelectorAll(".filter-btn");
-  const studentCards = document.querySelectorAll(".student-card");
+    // Simple filter for students: all / boys / girls
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const studentCards = document.querySelectorAll(".student-card");
 
-  filterButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter;
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter;
 
-      filterButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
 
-      studentCards.forEach((card) => {
-        const gender = card.dataset.gender;
-        if (filter === "all" || filter === gender) {
-          card.style.display = "";
-        } else {
-          card.style.display = "none";
+        studentCards.forEach((card) => {
+          const gender = card.dataset.gender;
+          if (filter === "all" || filter === gender) {
+            card.style.display = "";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+
+    // MINI ROBOT LOGIC
+    const robo = document.getElementById("robo-assistant");
+    let roboLocked = false;
+    let hoverTimer = null;
+    let currentUtterance = null;
+
+    // Robot follows pointer when not locked
+    document.addEventListener("mousemove", (e) => {
+      if (roboLocked) return;
+      const offsetX = 14; // small offset from pointer
+      const offsetY = 10;
+      robo.style.transform = `translate(${e.clientX + offsetX}px, ${e.clientY + offsetY}px)`;
+    });
+
+    function getStudentSummary(card) {
+      const name = card.querySelector(".student-name")?.innerText || "";
+      const roleText = card.querySelector(".student-role")?.innerText || "";
+      const qualitiesText = card.querySelector(".student-qualities")?.innerText || "";
+      const funText = card.querySelector(".student-fun")?.innerText || "";
+
+      const role = roleText.replace("Role:", "Role is");
+      const qualities = qualitiesText.replace("Qualities:", "Qualities:");
+      const fun = funText.replace("Funny:", "Funny fact:");
+
+      return [name, role, qualities, fun].filter(Boolean).join(". ");
+    }
+
+    function speakText(text) {
+      if (!("speechSynthesis" in window)) return;
+
+      window.speechSynthesis.cancel();
+      currentUtterance = new SpeechSynthesisUtterance(text);
+      currentUtterance.rate = 1;
+      currentUtterance.pitch = 1;
+
+      currentUtterance.onend = () => {
+        stopRobot();
+      };
+
+      window.speechSynthesis.speak(currentUtterance);
+    }
+
+    function moveRobotAboveCard(card) {
+      const rect = card.getBoundingClientRect();
+      const roboWidth = 76;
+      const x = rect.left + rect.width / 2 - roboWidth / 2;
+      const y = rect.top - 110; // stay above the card
+      robo.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function startRobotForCard(card) {
+      if (roboLocked) return; // avoid double trigger
+      roboLocked = true;
+      robo.classList.add("active");
+
+      moveRobotAboveCard(card);
+
+      const summary = getStudentSummary(card);
+      if (summary) {
+        speakText(summary);
+      } else {
+        // No text, just do animation for a short time
+        setTimeout(stopRobot, 1500);
+      }
+    }
+
+    function stopRobot() {
+      roboLocked = false;
+      robo.classList.remove("active");
+      if (currentUtterance) {
+        currentUtterance.onend = null;
+        currentUtterance = null;
+      }
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    // Attach hover listeners for each student card
+    studentCards.forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        // Start 2 second timer
+        hoverTimer = setTimeout(() => {
+          startRobotForCard(card);
+        }, 2000);
+      });
+
+      card.addEventListener("mouseleave", () => {
+        if (hoverTimer) {
+          clearTimeout(hoverTimer);
+          hoverTimer = null;
+        }
+        if (roboLocked) {
+          stopRobot();
         }
       });
     });
-  });
-
-  // 🔊 Text-to-Speech for each student card
-  function speakStudentCard(card) {
-    if (!("speechSynthesis" in window)) {
-      alert("Text-to-speech is not supported in this browser.");
-      return;
-    }
-
-    const name = card.querySelector(".student-name")?.innerText || "";
-    const role = card.querySelector(".student-role")?.innerText || "";
-    const qualities = card.querySelector(".student-qualities")?.innerText || "";
-    const fun = card.querySelector(".student-fun")?.innerText || "";
-
-    // Clean up the text a little
-    const text = [
-      name,
-      role.replace("Role:", "Role is"),
-      qualities.replace("Qualities:", "Qualities:"),
-      fun.replace("Funny:", "Funny fact:")
-    ]
-      .filter(Boolean)
-      .join(". ");
-
-    // Stop any current speech and speak this one
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1;   // speed
-    utterance.pitch = 1;  // voice pitch
-    window.speechSynthesis.speak(utterance);
-  }
-
-  // Add a speaker button to each student card automatically
-  studentCards.forEach((card) => {
-    const metaRow = card.querySelector(".student-meta-row") || card;
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "speak-btn";
-    btn.innerHTML = "🔊 Listen";
-
-    btn.addEventListener("click", () => speakStudentCard(card));
-
-    // Put the button nicely in the meta row
-    metaRow.appendChild(btn);
-  });
-</script>
+  </script>
+</body>
+</html>
